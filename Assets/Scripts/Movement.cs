@@ -45,7 +45,13 @@ public class Movement : Singleton<Movement> {
 
     // Use this for initialization
     private void Start() {
-        Reset();
+        //Reset();
+        ShuffleArray(target_center_Frequencies);
+        ShuffleArray(target_gain);
+        ShuffleArray(target_Q_values);
+        ResetPosition();
+        selectedBand = 0;
+        SelectBand(selectedBand);
         initPDConnection(IP);
         initTargetLocations();
         serial1.Open();
@@ -53,6 +59,7 @@ public class Movement : Singleton<Movement> {
         serial2.Open();
         serial2.ReadTimeout = 100;
         SelectBand(selectedBand);
+
         //initButtons();
     }
 
@@ -110,6 +117,12 @@ public class Movement : Singleton<Movement> {
         ResetPosition();
         selectedBand = 0;
         SelectBand(selectedBand);
+        resetArduino("reset", serial1);
+    }
+
+    public void resetArduino(string message, SerialPort serial){
+        serial.WriteLine(message);
+        serial.BaseStream.Flush();
     }
 
     private void UpdatePosition() {

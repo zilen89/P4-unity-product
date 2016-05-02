@@ -218,6 +218,7 @@ public class CanvasScript : Singleton<CanvasScript> {
     //Preparation for state 3
     public void PrepState4() {
         ready.gameObject.SetActive(false);
+        Movement.Instance.Reset();
         state = 4;
     }
 
