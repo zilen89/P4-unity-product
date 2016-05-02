@@ -20,6 +20,8 @@ public class Movement : Singleton<Movement> {
     public int selectedBand = 0;
     public static string koncentric_USB_Port = "COM6";
     public static string slider_USB_Port = "COM5";
+    static float[] LogFreqenciesMin = new float[] { 1.349f, 1.769f, 1.650f, 1.842f, 1.995f };
+    static float[] LogFreqenciesMax = new float[] { 1.506f, 1.995f, 2.187f, 2.456f, 2.692f };
     public GameObject target;
     public GameObject user;
     public Dropdown dropdown;
@@ -250,38 +252,16 @@ public class Movement : Singleton<Movement> {
     private void KeyboardMovement() {
         if (Input.GetKey(KeyCode.A) && center_Frequencies[selectedBand] > FreqMIN) {
             center_Frequencies[selectedBand] -= speed;
-            if (selectedBand == 0) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 1) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 2) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 3) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 4) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+            for (int i = 0; i < 5; i++)
+            {
+                sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
             }
         }
         if (Input.GetKey(KeyCode.D) && center_Frequencies[selectedBand] < FreqMAX) {
             center_Frequencies[selectedBand] += speed;
-            if (selectedBand == 0) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 1) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 2) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 3) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-            }
-            if (selectedBand == 4) {
-                sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+            for (int i = 0; i < 5; i++)
+            {
+                sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
             }
         }
         if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
@@ -308,20 +288,9 @@ public class Movement : Singleton<Movement> {
         Q_values[selectedBand] = QKnob.Q_Value;
         sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
-        if (selectedBand == 0) {
-            sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-        }
-        if (selectedBand == 1) {
-            sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-        }
-        if (selectedBand == 2) {
-            sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-        }
-        if (selectedBand == 3) {
-            sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-        }
-        if (selectedBand == 4) {
-            sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+        for (int i = 0; i < 5; i++)
+        {
+            sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
         }
     }
 
@@ -333,39 +302,17 @@ public class Movement : Singleton<Movement> {
                 if (value == "ENCO1.1" && center_Frequencies[selectedBand] > FreqMIN) {
                     //  print("Encoder 1 negative");
                     center_Frequencies[selectedBand] -= speed * 4.5f;
-                    if (selectedBand == 0) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 1) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 2) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 3) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 4) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+                    for (int i = 0; i < 5; i++)
+                    {
+                        sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
                     }
                 }
                 if (value == "ENCO1.2" && center_Frequencies[selectedBand] < FreqMAX) {
                     // print("Encoder 1 positive");
                     center_Frequencies[selectedBand] += speed * 4.5f;
-                    if (selectedBand == 0) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 1) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 2) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 3) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 4) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+                    for (int i = 0; i < 5; i++)
+                    {
+                        sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
                     }
                 }
 
@@ -455,20 +402,9 @@ public class Movement : Singleton<Movement> {
                     //print("SLIDER" + value);
 
                     center_Frequencies[selectedBand] = scale(550, 10, FreqMIN, FreqMAX, float.Parse(value));
-                    if (selectedBand == 0) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 1) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.506f, 1.995f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 2) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.650f, 2.187f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 3) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.842f, 2.456f, center_Frequencies[selectedBand]));
-                    }
-                    if (selectedBand == 4) {
-                        sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
+                    for (int i = 0; i < 5; i++)
+                    {
+                        sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
                     }
                 }
                 if (value == "B1") {
