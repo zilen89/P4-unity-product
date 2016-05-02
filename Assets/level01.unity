@@ -1725,7 +1725,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Q-Value
+  m_Text: Gain
 --- !u!222 &713345644
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5418,7 +5418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Gain
+  m_Text: Q-Value
 --- !u!222 &1966955688
 CanvasRenderer:
   m_ObjectHideFlags: 0

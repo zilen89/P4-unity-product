@@ -42,10 +42,12 @@ public class Movement : Singleton<Movement> {
     private void Start() {
         //Reset();
         Screen.SetResolution(1280, 720, true);
+        ResetPosition();
         ShuffleArray(target_center_Frequencies);
         ShuffleArray(target_gain);
         ShuffleArray(target_Q_values);
-        ResetPosition();
+        //ResetKnobs();
+
         selectedBand = 0;
         SelectBand(selectedBand);
         initPDConnection(IP);
@@ -285,11 +287,11 @@ public class Movement : Singleton<Movement> {
         }
         if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN) {
             gain[selectedBand] -= speed;
-            sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+            sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
         if (Input.GetKey(KeyCode.W) && gain[selectedBand] < gainMAX) {
             gain[selectedBand] += speed;
-            sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+            sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
         if (Input.GetKey(KeyCode.E) && Q_values[selectedBand] < qMAX) {
             Q_values[selectedBand] += multiplier;
@@ -305,7 +307,7 @@ public class Movement : Singleton<Movement> {
         center_Frequencies[selectedBand] = CFKnob.CF_value;
         gain[selectedBand] = GainKnob.gain_value;
         Q_values[selectedBand] = QKnob.Q_Value;
-        sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+        sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
         if (selectedBand == 0) {
             sendString("CF " + scale(FreqMIN, FreqMAX, 1.349f, 1.769f, center_Frequencies[selectedBand]));
@@ -371,12 +373,12 @@ public class Movement : Singleton<Movement> {
                 if (value == "ENCO2.1" && gain[selectedBand] > gainMIN) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
-                    sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+                    sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
                 if (value == "ENCO2.2" && gain[selectedBand] < gainMAX) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
-                    sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+                    sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
 
                 if (value == "ENCO3.1" && Q_values[selectedBand] > qMIN) {
@@ -432,12 +434,12 @@ public class Movement : Singleton<Movement> {
                 if (value == "ENCO1.1" && gain[selectedBand] > gainMIN) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
-                    sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+                    sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
                 if (value == "ENCO1.2" && gain[selectedBand] < gainMAX) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
-                    sendString("Q " + scale(gainMIN, gainMAX, -30, 30, gain[selectedBand]));
+                    sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
                 if (value == "ENCO2.1" && Q_values[selectedBand] > qMIN) {
                     //   print("Encoder 2 negative");
@@ -508,7 +510,7 @@ public class Movement : Singleton<Movement> {
     public void ResetPosition() {
         for (int i = 0; i < 5; i++) {
             center_Frequencies[i] = 90.0f;
-            gain[i] = 30.0f;
+            gain[i] = gainMAX;
             Q_values[i] = 3.0f;
         }
         ResetKnobs();
@@ -517,7 +519,7 @@ public class Movement : Singleton<Movement> {
     public static void ResetKnobs() {
         CFKnob.CF_value = 90.0f;
         QKnob.Q_Value = 3.0f;
-        GainKnob.gain_value = 30.0f;
+        GainKnob.gain_value = gainMAX;
         QKnob.Instance.ResetWheel();
         GainKnob.Instance.ResetWheel();
         CFKnob.Instance.ResetWheel();
