@@ -5359,7 +5359,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'CONGRATULATIONS
 
-    YOU''RE FINISHED!'
+    YOU''RE DONE!'
 --- !u!222 &2091512410
 CanvasRenderer:
   m_ObjectHideFlags: 0
