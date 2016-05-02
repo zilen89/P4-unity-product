@@ -204,26 +204,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1031a06e026e3a04b9cba5573acaebef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownMili: 3
   start: {fileID: 1351779437}
-  background: {fileID: 1870617458}
+  ready: {fileID: 0}
+  finish_button: {fileID: 0}
   timerText: {fileID: 1113953460}
   scoreText: {fileID: 842078048}
-  inputText: {fileID: 1431735653}
-  dropdown: {fileID: 514522610}
-  actual_test: 5
-  initial_test: 2
-  IP: 127.0.0.1
-  port: 9001
-  Q_knob: {fileID: 1069690773}
-  CF_knob: {fileID: 614720435}
-  gain_knob: {fileID: 1894962828}
   test_text: {fileID: 1894515974}
   finish_text: {fileID: 2091512409}
-  Q_text: {fileID: 713345643}
-  CF_text: {fileID: 872896929}
-  gain_text: {fileID: 1966955687}
-  istest: 1
+  inputText: {fileID: 1431735653}
+  dropdown: {fileID: 514522610}
+  background: {fileID: 1870617458}
+  doTrailTest: {fileID: 0}
+  countdownMili: 3
+  port: 9001
+  actual_test: 5
+  initial_test: 2
+  state: 0
+  IP: 127.0.0.1
 --- !u!1 &71428141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,8 +1392,15 @@ MonoBehaviour:
   speed: 3
   offset: 15
   multiplier: 0.1
+  scaleSize: 3
+  selectedBand: 0
   target: {fileID: 1980563598}
   user: {fileID: 718294528}
+  band1_Button: {fileID: 0}
+  band2_Button: {fileID: 0}
+  band3_Button: {fileID: 0}
+  band4_Button: {fileID: 0}
+  band5_Button: {fileID: 0}
   dropdown: {fileID: 514522610}
   center_Frequencies:
   - 766
@@ -3995,7 +3999,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'CONGRATULATIONS
 
-    YOU''RE DONE!'
+    THIS IS THE RIGHT ONE'
 --- !u!222 &2091512410
 CanvasRenderer:
   m_ObjectHideFlags: 0
