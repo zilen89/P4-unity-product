@@ -40,10 +40,10 @@ public class QKnob : Singleton<QKnob>
         currentMouseYPosition = Input.mousePosition.y - startYLocation;
         y_pos = currentMouseYPosition;
         z_degree = currentMouseYPosition - oldValue;
-        if (y_pos > oldValue && Q_Value < max_Value) {
+        if (y_pos > oldValue && Q_Value < max_Value && Player.Instance.isQActive) {
             Q_Value += 0.1f;
         }
-        if (y_pos < oldValue && Q_Value > min_value) {
+        if (y_pos < oldValue && Q_Value > min_value && Player.Instance.isQActive) {
             Q_Value -= 0.1f;
         }
         this.transform.Rotate(0, 0, -z_degree);

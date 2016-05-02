@@ -105,7 +105,7 @@ public class Movement : Singleton<Movement> {
         user.transform.GetChild(band_nr).gameObject.SetActive(true);
         target.transform.GetChild(band_nr).gameObject.SetActive(true);
         initTargetLocations();
-        ResetKnobs();
+        ResetKnobs(false);
     }
 
     public void Reset() {
@@ -285,19 +285,19 @@ public class Movement : Singleton<Movement> {
                 sendString("CF " + scale(FreqMIN, FreqMAX, 1.995f, 2.692f, center_Frequencies[selectedBand]));
             }
         }
-        if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN) {
+        if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
             gain[selectedBand] -= speed;
             sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.W) && gain[selectedBand] < gainMAX) {
+        if (Input.GetKey(KeyCode.W) && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
             gain[selectedBand] += speed;
             sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.E) && Q_values[selectedBand] < qMAX) {
+        if (Input.GetKey(KeyCode.E) && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
             Q_values[selectedBand] += multiplier;
             sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.Q) && Q_values[selectedBand] > qMIN) {
+        if (Input.GetKey(KeyCode.Q) && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
             Q_values[selectedBand] -= multiplier;
             sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
         }
@@ -370,23 +370,23 @@ public class Movement : Singleton<Movement> {
                     }
                 }
 
-                if (value == "ENCO2.1" && gain[selectedBand] > gainMIN) {
+                if (value == "ENCO2.1" && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO2.2" && gain[selectedBand] < gainMAX) {
+                if (value == "ENCO2.2" && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
 
-                if (value == "ENCO3.1" && Q_values[selectedBand] > qMIN) {
+                if (value == "ENCO3.1" && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
                     //   print("Encoder 2 negative");
                     Q_values[selectedBand] -= multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
                 }
-                if (value == "ENCO3.2" && Q_values[selectedBand] < qMAX) {
+                if (value == "ENCO3.2" && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
                     //   print("Encoder 2 positive");
                     Q_values[selectedBand] += multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
@@ -431,22 +431,22 @@ public class Movement : Singleton<Movement> {
         if (true) {
             try {
                 value = serial2.ReadLine();
-                if (value == "ENCO1.1" && gain[selectedBand] > gainMIN) {
+                if (value == "ENCO1.1" && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO1.2" && gain[selectedBand] < gainMAX) {
+                if (value == "ENCO1.2" && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO2.1" && Q_values[selectedBand] > qMIN) {
+                if (value == "ENCO2.1" && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
                     //   print("Encoder 2 negative");
                     Q_values[selectedBand] -= multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
                 }
-                if (value == "ENCO2.2" && Q_values[selectedBand] < qMAX) {
+                if (value == "ENCO2.2" && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
                     //   print("Encoder 2 positive");
                     Q_values[selectedBand] += multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
@@ -513,16 +513,20 @@ public class Movement : Singleton<Movement> {
             gain[i] = gainMAX;
             Q_values[i] = 3.0f;
         }
-        ResetKnobs();
+        ResetKnobs(true);
     }
 
-    public static void ResetKnobs() {
-        CFKnob.CF_value = 90.0f;
-        QKnob.Q_Value = 3.0f;
-        GainKnob.gain_value = gainMAX;
-        QKnob.Instance.ResetWheel();
-        GainKnob.Instance.ResetWheel();
-        CFKnob.Instance.ResetWheel();
+    public void ResetKnobs(bool hardReset) {
+        if (hardReset) {
+            CFKnob.CF_value = 90.0f;
+            QKnob.Q_Value = 3.0f;
+            GainKnob.gain_value = gainMAX;
+        }
+        else {
+            CFKnob.CF_value = center_Frequencies[selectedBand];
+            QKnob.Q_Value = Q_values[selectedBand];
+            GainKnob.gain_value = gain[selectedBand];
+        }
     }
 
     public float scale(float OldMin, float OldMax, float NewMin, float NewMax, float OldValue) {

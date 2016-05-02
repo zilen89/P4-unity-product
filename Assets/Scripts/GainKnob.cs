@@ -40,10 +40,10 @@ public class GainKnob : Singleton<GainKnob>
         currentMouseYPosition = Input.mousePosition.y - startYLocation;
         y_pos = currentMouseYPosition;
         z_degree = currentMouseYPosition - oldValue;
-        if (y_pos > oldValue && gain_value < max_Value) {
+        if (y_pos > oldValue && gain_value < max_Value && Player.Instance.isGainActive) {
             gain_value += 10;
         }
-        if (y_pos < oldValue && gain_value > min_value) {
+        if (y_pos < oldValue && gain_value > min_value && Player.Instance.isGainActive) {
             gain_value -= 10;
         }
         this.transform.Rotate(0, 0, -z_degree);
