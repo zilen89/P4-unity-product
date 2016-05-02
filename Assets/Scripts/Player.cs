@@ -6,16 +6,22 @@ public class Player : Singleton<Player>
 
     public GameObject gainBar;
     public GameObject triangles;
+    public Color[] colors;
 
 	// Use this for initialization
 	void Start () {
-	
+	    colors[0] = Color.blue;
+        colors[1] = Color.green;
+	    colors[2] = Color.red;
+        colors[3] = Color.yellow;
+	    colors[4] = Color.white;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+	    this.GetComponent<Renderer>().material.color = colors[Movement.Instance.selectedBand];
+        gainBar.GetComponent<Renderer>().material.color = colors[Movement.Instance.selectedBand];
+    }
 
     public void DisplayGain(float x, float y, int selectedBand, bool isActive)
     {
