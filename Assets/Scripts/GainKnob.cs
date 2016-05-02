@@ -4,8 +4,8 @@ using System.Collections;
 public class GainKnob : Singleton<GainKnob>
 {
     private float startYLocation;
-    public float max_Value = Movement.gainMAX;
-    public float min_value = Movement.gainMIN;
+    public float max_Value = Movement.Instance.gainMAX;
+    public float min_value = Movement.Instance.gainMIN;
     public float z_degree;
     private float oldValue;
     private float currentMouseYPosition;
@@ -14,7 +14,7 @@ public class GainKnob : Singleton<GainKnob>
 
     // Use this for initialization
     void Start () {
-        gain_value = 30;
+        gain_value = Movement.Instance.gainMAX;
     }
 	
 	// Update is called once per frame

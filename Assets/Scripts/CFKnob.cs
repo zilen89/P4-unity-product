@@ -4,8 +4,8 @@ using System.Collections;
 public class CFKnob : Singleton<CFKnob>
 {
     private float startYLocation;
-    public float max_Value = Movement.FreqMAX;
-    public float min_value = Movement.FreqMIN;
+    public float max_Value = Movement.Instance.FreqMAX;
+    public float min_value = Movement.Instance.FreqMIN;
     public float z_degree;
     private float oldValue;
     private float currentMouseYPosition;

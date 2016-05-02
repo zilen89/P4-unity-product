@@ -11,12 +11,12 @@ public class Movement : Singleton<Movement> {
     public float offset = 15;
     public float multiplier = 0.01f;
     public float scaleSize = 3;
-    public static float FreqMIN = 30;
-    public static float FreqMAX = 850;
-    public static float gainMIN = 30;
-    public static float gainMAX = 275;
-    public static float qMIN = 1;
-    public static float qMAX = 5;
+    public float FreqMIN = 30;
+    public float FreqMAX = 850;
+    public float gainMIN = 30;
+    public float gainMAX = 275;
+    public float qMIN = 1;
+    public float qMAX = 5;
     public int selectedBand = 0;
     public static string koncentric_USB_Port = "COM6";
     public static string slider_USB_Port = "COM5";
@@ -40,7 +40,6 @@ public class Movement : Singleton<Movement> {
 
     // Use this for initialization
     private void Start() {
-        //Reset();
         Screen.SetResolution(1280, 720, true);
         ResetPosition();
         ShuffleArray(target_center_Frequencies);

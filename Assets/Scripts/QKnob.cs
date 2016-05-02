@@ -4,8 +4,8 @@ using System.Collections;
 public class QKnob : Singleton<QKnob>
 {
     private float startYLocation;
-    public float max_Value = Movement.qMAX;
-    public float min_value = Movement.qMIN;
+    public float max_Value = Movement.Instance.qMAX;
+    public float min_value = Movement.Instance.qMIN;
     public float z_degree;
     private float oldValue;
     private float currentMouseYPosition;
