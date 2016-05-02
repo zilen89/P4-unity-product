@@ -109,7 +109,7 @@ public class CanvasScript : Singleton<CanvasScript> {
             //Countdown for trail test
             case 1:
                 timeLeft -= Time.deltaTime;
-                timerText.text = "Starting trail test in: " + Mathf.Round(timeLeft);
+                timerText.text = "Starting trial test in: " + Mathf.Round(timeLeft);
                 if (timeLeft <= 0) {
                     PrepState2();
                 }

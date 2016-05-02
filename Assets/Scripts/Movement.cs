@@ -59,6 +59,8 @@ public class Movement : Singleton<Movement> {
         serial2.Open();
         serial2.ReadTimeout = 100;
         SelectBand(selectedBand);
+        resetArduino("reset", serial1);
+        resetArduino("reset", serial2);
 
         //initButtons();
     }
@@ -118,6 +120,7 @@ public class Movement : Singleton<Movement> {
         selectedBand = 0;
         SelectBand(selectedBand);
         resetArduino("reset", serial1);
+        resetArduino("reset", serial2);
     }
 
     public void resetArduino(string message, SerialPort serial){
