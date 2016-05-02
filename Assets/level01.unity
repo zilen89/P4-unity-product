@@ -1872,7 +1872,7 @@ MonoBehaviour:
   user: {fileID: 718294528}
   dropdown: {fileID: 514522610}
   center_Frequencies:
-  - 766
+  - 765
   - 454.5
   - 711
   - 265.5
@@ -1884,11 +1884,11 @@ MonoBehaviour:
   - 3.9
   - 1
   gain:
-  - 150
-  - 84
-  - 120
-  - 264
-  - 198
+  - 149
+  - 83
+  - 121
+  - 263
+  - 197
   target_center_Frequencies:
   - 766
   - 456

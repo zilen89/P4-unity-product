@@ -53,8 +53,8 @@ public class CanvasScript : Singleton<CanvasScript> {
                 print("start pressed");
                 PrepState1();
             } else {
-                //PrepState1();
-                //PrepState5();
+                PrepState1();
+                PrepState5();
             }
         });
         finish_button.onClick.AddListener(() => {
