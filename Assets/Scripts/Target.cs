@@ -18,12 +18,12 @@ public class Target : Singleton<Target> {
     }
 
     public void UpdatePosition(float x) {
-        this.transform.position = new Vector3(x, this.transform.position.y, 0);
+        this.transform.position = new Vector3(x, this.transform.position.y, this.transform.position.z);
     }
 
     public void DisplayGain(float x, float y, int selectedBand, bool isActive) {
         gainBar.gameObject.SetActive(isActive);
-        gainBar.transform.position = new Vector3(x, y, 0);
+        gainBar.transform.position = new Vector3(x, y, gainBar.transform.position.z);
     }
 
     public void DisplayTriangle(float x, float y, float size, int selectedBand, bool isGainActive, bool isCFActive) {

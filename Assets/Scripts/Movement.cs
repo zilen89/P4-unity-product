@@ -152,7 +152,7 @@ public class Movement : Singleton<Movement> {
                 gain[selectedBand], 0);
             user.transform.GetChild(selectedBand).transform.localScale = new Vector3(Q_values[selectedBand], scaleSize,
                 0);
-            this.transform.position = new Vector3(center_Frequencies[selectedBand], this.transform.position.y, 0);
+            this.transform.position = new Vector3(center_Frequencies[selectedBand], this.transform.position.y, this.transform.position.z);
         }
 
     }
@@ -178,7 +178,6 @@ public class Movement : Singleton<Movement> {
         else {
             currentQHit = false;
         }
-        print("CF: " + currentCFHit + " Gain: " + currentGainHit + " Q: " + currentQHit);
         Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, currentCFHit);
         Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand,currentCFHit);
         Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, currentGainHit, currentCFHit);
