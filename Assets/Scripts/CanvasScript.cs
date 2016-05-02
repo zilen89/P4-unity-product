@@ -50,10 +50,11 @@ public class CanvasScript : Singleton<CanvasScript> {
         initPDConnection(IP);
         start.onClick.AddListener(() => {
             if (doTrailTest.isOn) {
+                print("start pressed");
                 PrepState1();
             } else {
-                PrepState1();
-                PrepState5();
+                //PrepState1();
+                //PrepState5();
             }
         });
         finish_button.onClick.AddListener(() => {
@@ -102,7 +103,6 @@ public class CanvasScript : Singleton<CanvasScript> {
                 for (int i = 0; i < 5; i++) {
                     if (CheckListScript.Instance.isBandsActive[i]) {
                         countValue++;
-                        print("Count: " + countValue);
                     }
                 }
                 if (countValue > 4) {
@@ -204,6 +204,7 @@ public class CanvasScript : Singleton<CanvasScript> {
     //Preparation for state 0
     public void PrepState0() {
         finish_button.gameObject.SetActive(false);
+        ready.gameObject.SetActive(false);
         doTrailTest.gameObject.SetActive(true);
         finish_text.gameObject.SetActive(false);
         dropdown.gameObject.SetActive(true);
@@ -215,11 +216,13 @@ public class CanvasScript : Singleton<CanvasScript> {
 
     //Preparation for state 1
     public void PrepState1() {
+        print("Started");
         start.gameObject.SetActive(false);
         dropdown.gameObject.SetActive(false);
         inputText.gameObject.SetActive(false);
         doTrailTest.gameObject.SetActive(false);
         timerText.gameObject.SetActive(true);
+        print("Switching to case 1");
         state = 1;
     }
 
@@ -232,6 +235,7 @@ public class CanvasScript : Singleton<CanvasScript> {
         timerText.text = " ";
         timeLeft = countdownMili;
         DisplayKnobs();
+        print("Switching to case 2");
         state = 2;
     }
 
@@ -240,19 +244,18 @@ public class CanvasScript : Singleton<CanvasScript> {
         timerText.gameObject.SetActive(true);
         timerText.text = "Ready for the real test?";
         scoreText.text = " ";
+        ready.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
         playingTime = 0f;
         sendString("close");
         test_text.gameObject.SetActive(false);
         Movement.Instance.Reset();
-        ready.gameObject.SetActive(true);
         state = 3;
     }
 
     //Preparation for state 3
     public void PrepState4() {
         ready.gameObject.SetActive(false);
-        Movement.Instance.Reset();
         state = 4;
     }
 
@@ -276,9 +279,9 @@ public class CanvasScript : Singleton<CanvasScript> {
         playingTime = 0f;
         sendString("close");
         test_text.gameObject.SetActive(false);
-        Movement.Instance.Reset();
         finish_text.gameObject.SetActive(true);
         finish_button.gameObject.SetActive(true);
+        Movement.Instance.Reset();
         state = 6;
     }
 
