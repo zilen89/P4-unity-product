@@ -16,14 +16,15 @@ public class CanvasScript : Singleton<CanvasScript> {
     public Text scoreText;
     public Text test_text;
     public Text finish_text;
+    public Text[] knobText;
     //All other things
-    //public Canvas knobCanvas;
     public InputField inputText;
     public Dropdown dropdown;
     public RawImage background;
     private IPEndPoint remoteEndPoint;
     private UdpClient client;
     public Toggle doTrailTest;
+    public GameObject[] knobs;
     //Varibles
     public float countdownMili = 300.0f;
     private float playingTime = 0f;
@@ -144,7 +145,10 @@ public class CanvasScript : Singleton<CanvasScript> {
 
     //Resets everything for a new test
     public void reset() {
-        //knobCanvas.gameObject.SetActive(false);
+        for (int i = 0; i < 3; i++) {
+            knobs[i].gameObject.SetActive(false);
+            knobText[i].gameObject.SetActive(false);
+        }
         finish_text.gameObject.SetActive(false);
         timeLeft = countdownMili;
     }
@@ -251,7 +255,10 @@ public class CanvasScript : Singleton<CanvasScript> {
     //Displays the digital knobs, if mouse input is selected in the start screen
     public void DisplayKnobs() {
         if (dropdown.value == 0) {
-            //knobCanvas.gameObject.SetActive(true);
+            for (int i = 0; i < 3; i++) {
+                knobs[i].gameObject.SetActive(true);
+                knobText[i].gameObject.SetActive(true);
+            }
         }
     }
 }

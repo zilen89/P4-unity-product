@@ -125,11 +125,11 @@ RectTransform:
   - {fileID: 1431735652}
   - {fileID: 893729449}
   - {fileID: 514522609}
+  - {fileID: 1894515973}
+  - {fileID: 2091512408}
   - {fileID: 713345642}
   - {fileID: 1966955686}
   - {fileID: 872896928}
-  - {fileID: 1894515973}
-  - {fileID: 2091512408}
   - {fileID: 618029794}
   - {fileID: 1511937224}
   - {fileID: 1090742639}
@@ -214,10 +214,18 @@ MonoBehaviour:
   scoreText: {fileID: 842078048}
   test_text: {fileID: 1894515974}
   finish_text: {fileID: 2091512409}
+  knobText:
+  - {fileID: 713345643}
+  - {fileID: 1966955687}
+  - {fileID: 872896929}
   inputText: {fileID: 1431735653}
   dropdown: {fileID: 514522610}
   background: {fileID: 1870617458}
   doTrailTest: {fileID: 618029793}
+  knobs:
+  - {fileID: 1069690773}
+  - {fileID: 1894962828}
+  - {fileID: 1980563598}
   countdownMili: 3
   port: 9001
   actual_test: 5
@@ -349,7 +357,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 89459395}
   - 212: {fileID: 89459396}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Knob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +415,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 235287652}
   - 212: {fileID: 235287653}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Knob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +430,7 @@ Transform:
   m_GameObject: {fileID: 235287651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0}
+  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0}
   m_Children: []
   m_Father: {fileID: 1069690777}
   m_RootOrder: 0
@@ -876,7 +884,7 @@ GameObject:
   - 65: {fileID: 614720437}
   - 23: {fileID: 614720436}
   - 114: {fileID: 614720440}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,12 +943,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 614720435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 950, y: 150, z: -670.875}
+  m_LocalPosition: {x: 1000, y: 150, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children:
   - {fileID: 89459395}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!114 &614720440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,10 +1311,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43565588}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: 165}
+  m_AnchoredPosition: {x: 590, y: 165}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713345643
@@ -1379,7 +1387,7 @@ Transform:
   - {fileID: 1020531036}
   - {fileID: 780362650}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
 --- !u!4 &726092226 stripped
 Transform:
   m_PrefabParentObject: {fileID: 480632, guid: 3f7c1ded141f5e4458a2f3276079b7ea, type: 2}
@@ -1393,7 +1401,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 739777861}
   - 212: {fileID: 739777862}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Knob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,10 +1965,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43565588}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: -65}
+  m_AnchoredPosition: {x: 595, y: -75}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872896929
@@ -2332,7 +2340,7 @@ GameObject:
   - 65: {fileID: 1069690775}
   - 23: {fileID: 1069690774}
   - 114: {fileID: 1069690778}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Q
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,12 +2399,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1069690773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 950, y: 350, z: -670.875}
+  m_LocalPosition: {x: 1000, y: 350, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children:
   - {fileID: 235287652}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 4
 --- !u!114 &1069690778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4079,7 +4087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1870617458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4288,7 +4296,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43565588}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 165}
@@ -4345,7 +4353,7 @@ GameObject:
   - 65: {fileID: 1894962830}
   - 23: {fileID: 1894962829}
   - 114: {fileID: 1894962833}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Gain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4404,12 +4412,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1894962828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 950, y: 250, z: -670.875}
+  m_LocalPosition: {x: 1000, y: 250, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children:
   - {fileID: 739777861}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!114 &1894962833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4452,10 +4460,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43565588}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: 50}
+  m_AnchoredPosition: {x: 595, y: 45}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966955687
@@ -4528,7 +4536,7 @@ Transform:
   - {fileID: 841795633}
   - {fileID: 633886686}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
 --- !u!4 &1993900791 stripped
 Transform:
   m_PrefabParentObject: {fileID: 480632, guid: 3f7c1ded141f5e4458a2f3276079b7ea, type: 2}
@@ -4700,7 +4708,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 43565588}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 97.5}
