@@ -22,11 +22,11 @@ public class Movement : Singleton<Movement> {
     public static string slider_USB_Port = "COM5";
     public GameObject target;
     public GameObject user;
-    public Button band1_Button;
+    /*public Button band1_Button;
     public Button band2_Button;
     public Button band3_Button;
     public Button band4_Button;
-    public Button band5_Button;
+    public Button band5_Button;*/
     public Dropdown dropdown;
     SerialPort serial1 = new SerialPort(koncentric_USB_Port, 9600);
     SerialPort serial2 = new SerialPort(slider_USB_Port, 9600);
@@ -53,7 +53,7 @@ public class Movement : Singleton<Movement> {
         serial2.Open();
         serial2.ReadTimeout = 100;
         SelectBand(selectedBand);
-        initButtons();
+        //initButtons();
     }
 
     // Update is called once per frame
@@ -517,7 +517,7 @@ public class Movement : Singleton<Movement> {
         return (NewValue);
     }
 
-    public void initButtons() {
+    /*public void initButtons() {
         band1_Button.onClick.AddListener(() => {
             Debug.Log("Test");
             print("Band1");
@@ -534,5 +534,5 @@ public class Movement : Singleton<Movement> {
         band5_Button.onClick.AddListener(() => {
             print("Band5");
         });
-    }
+    } */
 }
