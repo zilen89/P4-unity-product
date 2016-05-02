@@ -13,7 +13,10 @@ public class Target : Singleton<Target> {
 
     // Update is called once per frame
     void Update() {
+    }
 
+    public void UpdatePosition(float x) {
+        this.transform.position = new Vector3(x, this.transform.position.y, 0);
     }
 
     public void DisplayGain(float x, float y, int selectedBand, bool isActive) {
