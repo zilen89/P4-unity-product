@@ -41,6 +41,7 @@ public class Movement : Singleton<Movement> {
     // Use this for initialization
     private void Start() {
         //Reset();
+        Screen.SetResolution(1280, 720, true);
         ShuffleArray(target_center_Frequencies);
         ShuffleArray(target_gain);
         ShuffleArray(target_Q_values);

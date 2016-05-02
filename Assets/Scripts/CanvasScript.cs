@@ -173,6 +173,11 @@ public class CanvasScript : Singleton<CanvasScript> {
         for (int i = 0; i < 3; i++) {
             knobs[i].gameObject.SetActive(false);
             knobText[i].gameObject.SetActive(false);
+            band1_Button.gameObject.SetActive(false);
+            band2_Button.gameObject.SetActive(false);
+            band3_Button.gameObject.SetActive(false);
+            band4_Button.gameObject.SetActive(false);
+            band5_Button.gameObject.SetActive(false);
         }
         finish_text.gameObject.SetActive(false);
         timeLeft = countdownMili;
@@ -283,6 +288,11 @@ public class CanvasScript : Singleton<CanvasScript> {
             for (int i = 0; i < 3; i++) {
                 knobs[i].gameObject.SetActive(true);
                 knobText[i].gameObject.SetActive(true);
+                band1_Button.gameObject.SetActive(true);
+                band2_Button.gameObject.SetActive(true);
+                band3_Button.gameObject.SetActive(true);
+                band4_Button.gameObject.SetActive(true);
+                band5_Button.gameObject.SetActive(true);
             }
         }
     }
