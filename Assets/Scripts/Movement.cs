@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System.IO.Ports;
 
 public class Movement : Singleton<Movement> {
-    public float speed = 5;
+    public float speed = 4.5f;
     public float offset = 15;
     public float multiplier = 0.01f;
     public float scaleSize = 3;
@@ -34,6 +34,10 @@ public class Movement : Singleton<Movement> {
     public float[] target_Q_values = new float[5];
     public float[] target_gain = new float[5];
     string value;
+
+    public bool currentCFHit;
+    public bool currentGainHit;
+    public bool currentQHit;
 
     public string IP = "127.0.0.1";
     public int port = 9001;
@@ -157,24 +161,28 @@ public class Movement : Singleton<Movement> {
         Target.Instance.UpdatePosition(target_center_Frequencies[selectedBand]);
         if (center_Frequencies[selectedBand] < target.transform.GetChild(selectedBand).transform.position.x + offset &&
             center_Frequencies[selectedBand] > target.transform.GetChild(selectedBand).transform.position.x - offset) {
-            Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, true);
-            Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand, true);
+            currentCFHit = true;
         } else {
-            Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, false);
-            Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand, false);
+            currentCFHit = false;
         }
         if (gain[selectedBand] < target.transform.GetChild(selectedBand).transform.position.y + offset &&
             gain[selectedBand] > target.transform.GetChild(selectedBand).transform.position.y - offset) {
-            Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, true);
-            Target.Instance.DisplayTriangle(target_center_Frequencies[selectedBand], target_gain[selectedBand], target_Q_values[selectedBand], selectedBand, true);
+            currentGainHit = true;
         } else {
-            Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, false);
-            Target.Instance.DisplayTriangle(target_center_Frequencies[selectedBand], target_gain[selectedBand], target_Q_values[selectedBand], selectedBand, false);
+            currentGainHit = false;
         }
-        if (Q_values[selectedBand] < target.transform.GetChild(selectedBand).transform.localScale.x + offset / 100 &&
-            Q_values[selectedBand] > target.transform.GetChild(selectedBand).transform.localScale.x - offset / 100) {
-        } else {
+        if (Q_values[selectedBand] < target.transform.GetChild(selectedBand).transform.localScale.x + offset/100 &&
+            Q_values[selectedBand] > target.transform.GetChild(selectedBand).transform.localScale.x - offset/100) {
+            currentQHit = true;
         }
+        else {
+            currentQHit = false;
+        }
+        print("CF: " + currentCFHit + " Gain: " + currentGainHit + " Q: " + currentQHit);
+        Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, currentCFHit);
+        Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand,currentCFHit);
+        Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, currentGainHit, currentCFHit);
+        Target.Instance.DisplayTriangle(target_center_Frequencies[selectedBand], target_gain[selectedBand], target_Q_values[selectedBand], selectedBand, currentGainHit, currentCFHit);
     }
 
     bool isTargetHit() {
@@ -188,18 +196,6 @@ public class Movement : Singleton<Movement> {
         } else {
             return false;
         }
-    }
-
-    float getRandomYPosition() {
-        float newNumber;
-        newNumber = UnityEngine.Random.Range(gainMIN, gainMAX);
-        return newNumber;
-    }
-
-    float getRandomSize() {
-        float newNumber;
-        newNumber = UnityEngine.Random.Range(qMIN, qMAX);
-        return newNumber;
     }
 
     public static void ShuffleArray<T>(T[] arr) {
@@ -246,8 +242,7 @@ public class Movement : Singleton<Movement> {
     private void initTargetLocations() {
         target.transform.GetChild(selectedBand).transform.position = new Vector3(target_center_Frequencies[selectedBand], target_gain[selectedBand], 0);
         target.transform.GetChild(selectedBand).transform.localScale = new Vector3(target_Q_values[selectedBand], scaleSize, 0);
-        print("Placement of " + (selectedBand + 1) + " triangle. X: " + target_center_Frequencies[selectedBand] + " Y: " + target_gain[selectedBand] + " Size: " + target_Q_values[selectedBand]);
-    }
+        }
 
     private void KeyboardMovement() {
         if (Input.GetKey(KeyCode.A) && center_Frequencies[selectedBand] > FreqMIN) {
@@ -264,19 +259,19 @@ public class Movement : Singleton<Movement> {
                 sendString("CF " + scale(FreqMIN, FreqMAX, LogFreqenciesMin[i], LogFreqenciesMax[i], center_Frequencies[selectedBand]));
             }
         }
-        if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
+        if (Input.GetKey(KeyCode.S) && gain[selectedBand] > gainMIN && currentCFHit) {
             gain[selectedBand] -= speed;
             sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.W) && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
+        if (Input.GetKey(KeyCode.W) && gain[selectedBand] < gainMAX && currentCFHit) {
             gain[selectedBand] += speed;
             sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.E) && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
+        if (Input.GetKey(KeyCode.E) && Q_values[selectedBand] < qMAX && currentCFHit && currentGainHit) {
             Q_values[selectedBand] += multiplier;
             sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
         }
-        if (Input.GetKey(KeyCode.Q) && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
+        if (Input.GetKey(KeyCode.Q) && Q_values[selectedBand] > qMIN && currentCFHit && currentGainHit) {
             Q_values[selectedBand] -= multiplier;
             sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
         }
@@ -316,23 +311,23 @@ public class Movement : Singleton<Movement> {
                     }
                 }
 
-                if (value == "ENCO2.1" && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
+                if (value == "ENCO2.1" && gain[selectedBand] > gainMIN && currentCFHit) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO2.2" && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
+                if (value == "ENCO2.2" && gain[selectedBand] < gainMAX && currentCFHit) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
 
-                if (value == "ENCO3.1" && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
+                if (value == "ENCO3.1" && Q_values[selectedBand] > qMIN && currentCFHit && currentGainHit) {
                     //   print("Encoder 2 negative");
                     Q_values[selectedBand] -= multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
                 }
-                if (value == "ENCO3.2" && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
+                if (value == "ENCO3.2" && Q_values[selectedBand] < qMAX && currentCFHit && currentGainHit) {
                     //   print("Encoder 2 positive");
                     Q_values[selectedBand] += multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
@@ -377,22 +372,22 @@ public class Movement : Singleton<Movement> {
         if (true) {
             try {
                 value = serial2.ReadLine();
-                if (value == "ENCO1.1" && gain[selectedBand] > gainMIN && Player.Instance.isGainActive) {
+                if (value == "ENCO1.1" && gain[selectedBand] > gainMIN && currentCFHit) {
                     //   print("Encoder 2 negative");
                     gain[selectedBand] -= speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO1.2" && gain[selectedBand] < gainMAX && Player.Instance.isGainActive) {
+                if (value == "ENCO1.2" && gain[selectedBand] < gainMAX && currentCFHit) {
                     //   print("Encoder 2 positive");
                     gain[selectedBand] += speed * 2;
                     sendString("Q " + scale(gainMIN, gainMAX, -40, 40, gain[selectedBand]));
                 }
-                if (value == "ENCO2.1" && Q_values[selectedBand] > qMIN && Player.Instance.isQActive) {
+                if (value == "ENCO2.1" && Q_values[selectedBand] > qMIN && currentCFHit && currentGainHit) {
                     //   print("Encoder 2 negative");
                     Q_values[selectedBand] -= multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));
                 }
-                if (value == "ENCO2.2" && Q_values[selectedBand] < qMAX && Player.Instance.isQActive) {
+                if (value == "ENCO2.2" && Q_values[selectedBand] < qMAX && currentCFHit && currentGainHit) {
                     //   print("Encoder 2 positive");
                     Q_values[selectedBand] += multiplier;
                     sendString("Gain " + scale(qMIN, qMAX, 0, 100, Q_values[selectedBand]));

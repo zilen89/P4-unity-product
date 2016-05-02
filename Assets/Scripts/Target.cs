@@ -8,11 +8,11 @@ public class Target : Singleton<Target> {
     public Color[] colors;
 
     // Use this for initialization
-    void Start() {
+    private void Start() {
     }
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         this.GetComponent<Renderer>().material.color = colors[Movement.Instance.selectedBand];
         gainBar.GetComponent<Renderer>().material.color = colors[Movement.Instance.selectedBand];
     }
@@ -26,12 +26,19 @@ public class Target : Singleton<Target> {
         gainBar.transform.position = new Vector3(x, y, 0);
     }
 
-    public void DisplayTriangle(float x, float y, float size, int selectedBand, bool isActive) {
-        triangles.transform.GetChild(selectedBand).gameObject.SetActive(isActive);
-        triangles.transform.GetChild(selectedBand).transform.position = new Vector3(x, y, 0);
-        triangles.transform.GetChild(selectedBand).transform.localScale = new Vector3(size, triangles.transform.GetChild(selectedBand).transform.localScale.y, 0);
-        if (isActive) {
-            gainBar.gameObject.SetActive(false);
+    public void DisplayTriangle(float x, float y, float size, int selectedBand, bool isGainActive, bool isCFActive) {
+        if (isCFActive) {
+            triangles.transform.GetChild(selectedBand).gameObject.SetActive(isGainActive);
+            triangles.transform.GetChild(selectedBand).transform.position = new Vector3(x, y, 0);
+            triangles.transform.GetChild(selectedBand).transform.localScale = new Vector3(size,
+                triangles.transform.GetChild(selectedBand).transform.localScale.y, 0);
+            if (isGainActive) {
+                gainBar.gameObject.SetActive(false);
+            }
         }
+        else {
+            triangles.transform.GetChild(selectedBand).gameObject.SetActive(isCFActive);
+        }
+
     }
 }
