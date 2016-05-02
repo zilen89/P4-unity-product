@@ -11,6 +11,11 @@ public class CanvasScript : Singleton<CanvasScript> {
     public Button start;
     public Button ready;
     public Button finish_button;
+    public Button band1_Button;
+    public Button band2_Button;
+    public Button band3_Button;
+    public Button band4_Button;
+    public Button band5_Button;
     //Texts
     public Text timerText;
     public Text scoreText;
@@ -56,6 +61,26 @@ public class CanvasScript : Singleton<CanvasScript> {
         });
         ready.onClick.AddListener(() => {
             PrepState4();
+        });
+        band1_Button.onClick.AddListener(() => {
+            Movement.Instance.selectedBand = 0;
+            Movement.Instance.SelectBand(0);
+        });
+        band2_Button.onClick.AddListener(() => {
+            Movement.Instance.selectedBand = 1;
+            Movement.Instance.SelectBand(1);
+        });
+        band3_Button.onClick.AddListener(() => {
+            Movement.Instance.selectedBand = 2;
+            Movement.Instance.SelectBand(2);
+        });
+        band4_Button.onClick.AddListener(() => {
+            Movement.Instance.selectedBand = 3;
+            Movement.Instance.SelectBand(3);
+        });
+        band5_Button.onClick.AddListener(() => {
+            Movement.Instance.selectedBand = 4;
+            Movement.Instance.SelectBand(4);
         });
     }
 
