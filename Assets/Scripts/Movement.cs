@@ -157,14 +157,18 @@ public class Movement : Singleton<Movement> {
         if (center_Frequencies[selectedBand] < target.transform.GetChild(selectedBand).transform.position.x + offset &&
             center_Frequencies[selectedBand] > target.transform.GetChild(selectedBand).transform.position.x - offset) {
             Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, true);
+            Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand, true);
         } else {
             Player.Instance.DisplayGain(center_Frequencies[selectedBand], gain[selectedBand], selectedBand, false);
+            Target.Instance.DisplayGain(target_center_Frequencies[selectedBand], target_gain[selectedBand], selectedBand, false);
         }
         if (gain[selectedBand] < target.transform.GetChild(selectedBand).transform.position.y + offset &&
             gain[selectedBand] > target.transform.GetChild(selectedBand).transform.position.y - offset) {
             Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, true);
+            Target.Instance.DisplayTriangle(target_center_Frequencies[selectedBand], target_gain[selectedBand], target_Q_values[selectedBand], selectedBand, true);
         } else {
             Player.Instance.DisplayTriangle(center_Frequencies[selectedBand], gain[selectedBand], Q_values[selectedBand], selectedBand, false);
+            Target.Instance.DisplayTriangle(target_center_Frequencies[selectedBand], target_gain[selectedBand], target_Q_values[selectedBand], selectedBand, false);
         }
         if (Q_values[selectedBand] < target.transform.GetChild(selectedBand).transform.localScale.x + offset / 100 &&
             Q_values[selectedBand] > target.transform.GetChild(selectedBand).transform.localScale.x - offset / 100) {
