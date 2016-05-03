@@ -4592,7 +4592,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Do Trail Test
+  m_Text: Do Trial Test
 --- !u!222 &1576864829
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5675,9 +5675,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CONGRATULATIONS
-
-    THIS IS THE RIGHT ONE'
+  m_Text: Thank you for participating!
 --- !u!222 &2091512410
 CanvasRenderer:
   m_ObjectHideFlags: 0
