@@ -18,12 +18,12 @@ public class Movement : Singleton<Movement> {
     public float qMIN = 1;
     public float qMAX = 5;
     public int selectedBand = 0;
-    public static string koncentric_USB_Port = "COM6";
+   // public static string koncentric_USB_Port = "COM6";
     public static string slider_USB_Port = "COM5";
     public GameObject target;
     public GameObject user;
     public Dropdown dropdown;
-    SerialPort serial1 = new SerialPort(koncentric_USB_Port, 9600);
+  //  SerialPort serial1 = new SerialPort(koncentric_USB_Port, 9600);
     SerialPort serial2 = new SerialPort(slider_USB_Port, 9600);
     public float[] center_Frequencies = new float[5];
     public float[] Q_values = new float[5];
@@ -55,12 +55,12 @@ public class Movement : Singleton<Movement> {
         SelectBand(selectedBand);
         initPDConnection(IP);
         initTargetLocations();
-        serial1.Open();
-        serial1.ReadTimeout = 100;
+    //    serial1.Open();
+    //    serial1.ReadTimeout = 100;
         serial2.Open();
         serial2.ReadTimeout = 100;
         SelectBand(selectedBand);
-        resetArduino("reset", serial1);
+    //    resetArduino("reset", serial1);
         resetArduino("reset", serial2);
     }
 
@@ -118,7 +118,7 @@ public class Movement : Singleton<Movement> {
         ResetPosition();
         selectedBand = 0;
         SelectBand(selectedBand);
-        resetArduino("reset", serial1);
+    //    resetArduino("reset", serial1);
         resetArduino("reset", serial2);
     }
 
@@ -338,7 +338,7 @@ public class Movement : Singleton<Movement> {
     private void KnobsceptionMovement() {
         if (true) {
             try {
-                value = serial1.ReadLine();
+            //    value = serial1.ReadLine();
 
                 if (value == "ENCO1.1" && center_Frequencies[selectedBand] > FreqMIN) {
                     //  print("Encoder 1 negative");
